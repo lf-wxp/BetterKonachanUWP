@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+
+    <link href="home.css" rel="stylesheet"/>
+    <script src="home.js"></script>
+</head>
+<body>
+    <div class="fragment">
+        <div data-win-options="" data-win-control="WinJS.Binding.Template" style="display:none;" class="listItemTemplate">
+            <div class="listItem">
+                <img src="" alt="" data-win-bind="src:preview_url"/>
+            </div>
+        </div>
+        <div class='imgListView' data-win-control="WinJS.UI.ListView" data-win-options="{
+             itemDataSource:Data.ListItem.dataSource,
+             itemTemplate:select('.listItemTemplate'),
+             layout:{type:WinJS.UI.GridLayout}
+             }"></div>    
+    </div>
+</body>
+</html>

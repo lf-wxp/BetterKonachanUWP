@@ -1,0 +1,21 @@
+﻿body {
+}
+.fragment {
+}
+.imgListView {
+    width:100%;
+    height:100%;
+}
+.imgListView .win-viewport{
+    height:100%;
+    width:100%;
+}
+
+.imgListView .win-viewport.win-vertical .win-surface {
+    margin-left:0px;
+}
+.imgListView .win-container {
+    width:300px;
+    height:150px;
+    overflow:hidden;
+}
