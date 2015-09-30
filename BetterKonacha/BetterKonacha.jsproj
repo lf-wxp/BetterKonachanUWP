@@ -70,10 +70,20 @@
     <Content Include="images\Wide310x150Logo.scale-200.png" />
     <Content Include="js\default.js" />
     <Content Include="css\default.css" />
+    <Content Include="js\dataStorage.js" />
     <Content Include="js\navigation.js" />
+    <Content Include="pages\download\download.css" />
+    <Content Include="pages\download\download.html" />
+    <Content Include="pages\download\download.js" />
     <Content Include="pages\home\home.css" />
     <Content Include="pages\home\home.html" />
     <Content Include="pages\home\home.js" />
+    <Content Include="pages\settings\settings.css" />
+    <Content Include="pages\settings\settings.html" />
+    <Content Include="pages\settings\settings.js" />
+    <Content Include="pages\view\view.css" />
+    <Content Include="pages\view\view.html" />
+    <Content Include="pages\view\view.js" />
     <Content Include="WinJS\css\ui-dark.css" />
     <Content Include="WinJS\css\ui-light.css" />
     <Content Include="WinJS\fonts\Symbols.ttf" />
@@ -83,7 +93,7 @@
     <None Include="BetterKonacha_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="pages\settings\" />
+    <Folder Include="data\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
   <!-- To modify your build process, add your task inside one of the targets below then uncomment

@@ -372,7 +372,7 @@
     "appBarIcons\\priority":                            "\uE182", //  group:Mail and calendar
     "_appBarIcons\\priority.comment":                   "{Locked:qps-ploc,qps-plocm}",
     "appBarIcons\\uploadskydrive":                      "\uE183", //  group:File
-    "_appBarIcons\\uploadskydrive.comment":             "{Locked:qps-ploc,qps-plocm}",
+    "_appBarIcons\\uploadskydrive.comment":             "{Locked:qps-ploc,qps-appBarIcons\\folderplocm}",
     "appBarIcons\\gototoday":                           "\uE184", //  group:Mail and calendar
     "_appBarIcons\\gototoday.comment":                  "{Locked:qps-ploc,qps-plocm}",
     "appBarIcons\\font":                                "\uE185", //  group:Editing

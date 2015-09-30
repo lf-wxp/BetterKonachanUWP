@@ -12,35 +12,39 @@
 
     <!-- uwpUI 引用 -->
     <link href="/css/default.css" rel="stylesheet" />
+    <script src="js/dataStorage.js"></script>
     <script src="/js/default.js"></script>
     <script src="js/navigation.js"></script>
+
 </head>
 <body class="win-type-body">
-    <div class="appBarContain">
-        <div class="fixContain">
-            <button data-win-control="WinJS.UI.SplitViewPaneToggle" data-win-options="{splitView:select('.mySplit')}" class="anotherPaneToggle"></button>
+    <div class="topAppBarContain">
+        <button data-win-control="WinJS.UI.SplitViewPaneToggle" data-win-options="{splitView:select('.mySplit')}" class="anotherPaneToggle"></button>
+        <div class="appBars">
             <div class="fixName">POST</div>
-        </div>
-        <div class="myAppBar" data-win-control="WinJS.UI.ToolBar" data-win-options="{placement:'top'}">
-            <div data-win-control="WinJS.UI.Command" data-win-options="{id:'searchBoxCon',type:'content'}" class="searchBoxCon">
-                <div class="win-interactive searchBox" data-win-control="WinJS.UI.AutoSuggestBox" data-win-options="{placeholderText:'Search for tags'}"></div>
-            </div>
-            <div data-win-control="WinJS.UI.Command" data-win-options="{id:'cancle',type:'content',hidden:true}" class="cancleBox">
-                <div class="textCommand">
-                    cancle
+                <div class="myAppBar" data-win-control="WinJS.UI.ToolBar" data-win-options="{placement:'top'}">
+                    <div data-win-control="WinJS.UI.Command" data-win-options="{id:'searchBoxCon',type:'content'}" class="searchBoxCon">
+                        <div class="win-interactive searchBox" data-win-control="WinJS.UI.AutoSuggestBox" data-win-options="{placeholderText:'Search for tags'}"></div>
+                    </div>
+                    <div data-win-control="WinJS.UI.Command" data-win-options="{id:'cancle',type:'content',hidden:true}" class="cancleBox">
+                        <div class="textCommand">
+                            cancle
+                        </div>
+                    </div>
+                    <button data-win-control="WinJS.UI.Command" data-win-options="{id:'search',icon:'zoom',label:'search',tooltip:'search for tags',hidden:true}" class="searchBar"></button>
+                    <button data-win-control="WinJS.UI.Command" data-win-options="{id:'select',label:'select',icon:'list',tooltip:'selection'}" class="selectBar"></button>
+                    <button data-win-control="WinJS.UI.Command" data-win-options="{id:'download',label:'download',icon:'download',tooltip:'download picture'}" class="downloadBar"></button>
                 </div>
-            </div>
-            <button data-win-control="WinJS.UI.Command" data-win-options="{id:'search',icon:'zoom',label:'search',tooltip:'search for tags',hidden:true}" class="searchBar"></button>
-            <button data-win-control="WinJS.UI.Command" data-win-options="{id:'select',label:'select',icon:'list',tooltip:'selection'}" class="selectBar"></button>
-            <button data-win-control="WinJS.UI.Command" data-win-options="{id:'download',label:'download',icon:'download',tooltip:'download picture'}" class="downloadBar"></button>
         </div>
     </div>
+
     
     <div class="mySplit" data-win-control="WinJS.UI.SplitView" data-win-options="{openedDisplayMode:'overlay'}" >
         <div class="mySplitHeader">
             <div class="mySplitNavContain">
-                <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Home', icon: 'home'}"></div>
-                <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Setting', icon: 'settings'}"></div>
+                <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Home', icon: 'home',location:'/pages/home/home.html'}"></div>
+                <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Setting', icon: 'settings',location:'/pages/settings/settings.html'}"></div>
+                <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'download', icon: 'download',location:'/pages/download/download.html'}"></div>
             </div>
         </div>
         <div class="mySplitContain">
@@ -48,8 +52,6 @@
             </div>
         </div>
      </div>
-    <div class="myToolBar" data-win-control="WinJS.UI.ToolBar" data-win-options="{placement:'bottom'}">
-        <button data-win-control="WinJS.UI.Command" data-win-options="{id:'download',label:'download',icon:'download',tooltip:'download picture'}" class="downloadBar"></button>
-    </div>
+    
 </body>
 </html>

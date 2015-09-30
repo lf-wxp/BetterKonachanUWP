@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link href="view.css" rel="stylesheet"/>
+    <script src="view.js"></script>
+</head>
+<body>
+    <div class="myFlipViewTemplate" data-win-control="WinJS.Binding.Template">
+        <div class="flipItem">
+            <img src="" alt="" data-win-bind="src:sample_url" />
+        </div>
+    </div>
+    <div class="itemInfo">
+        <div class="rect"></div>
+        <div class="myViewToolBar" data-win-control="WinJS.UI.ToolBar">
+            <button data-win-control="WinJS.UI.Command" data-win-options="{icon:'download',id:'download',tooltip:'add to downlist'}"></button>
+        </div>
+    </div>
+    <div class="myFlipView" data-win-control="WinJS.UI.FlipView">
+
+    </div>
+</body>
+</html>

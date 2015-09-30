@@ -67,6 +67,7 @@
                     element.style.visibility = "hidden";
                     element.style.width = "100%";
                     element.style.height = "100%";
+                    element.style.overflow = 'auto';
                     return element;
                 },
 
@@ -81,7 +82,15 @@
 
                 _navigated: function () {
                     this.pageElement.style.visibility = "";
-                    WinJS.UI.Animation.enterPage(this._getAnimationElements(),null).done();
+                    var splitView = document.querySelector('.mySplit').winControl;
+                    splitView.closePane();
+                    if (WinJS.Navigation.canGoBack) {// set the system goback button
+                        Windows.UI.Core.SystemNavigationManager.getForCurrentView().appViewBackButtonVisibility = 0;
+                    } else {
+                        Windows.UI.Core.SystemNavigationManager.getForCurrentView().appViewBackButtonVisibility = 1;
+                    }
+                    WinJS.UI.Animation.enterPage(this._getAnimationElements(), null).done();
+
                 },
 
                 // 通过向 DOM 中添加新页面响应导航。

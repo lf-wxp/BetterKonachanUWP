@@ -12,25 +12,43 @@
                 fixName = document.querySelector('.fixName'),
                 fixNameText = fixName.textContent,
                 DeviceFamily = Windows.System.Profile.AnalyticsInfo.versionInfo.deviceFamily;//Windows.Mobile,Windows.Desktop
+            fixName.textContent = 'Post';
             progress.style.position = 'absolute';
             progress.style.left = '0px';
             progress.style.width = '100%';
             progress.style.top = '5px';
-            fragment.appendChild(progress);
 
-            //ListView invoke event 
+
+            var myAppBar = document.querySelector('.myAppBar'),
+                splitView = document.querySelector('.mySplit'),
+                topAppBarContain = document.querySelector('.topAppBarContain');
+
+
+            if (DeviceFamily === 'Windows.Mobile') {
+                splitView.winControl.closedDisplayMode = "none";
+            }
+            if (DeviceFamily === 'Windows.Desktop') {
+                splitView.winControl.closedDisplayMode = "inline";
+            }
+            myAppBar.style.display = 'inline-block';
+            topAppBarContain.style.display = 'block';
+
+            //ListView selectionchanged event 
             imgListView.winControl.addEventListener('selectionchanged', function () {
                 var num = imgListView.winControl.selection.count();
                 fixName.textContent = num + ' items selected';
             });
 
+            // ListView invoked event 
+            imgListView.winControl.addEventListener('iteminvoked', function (ev) {
+                WinJS.Navigation.navigate('/pages/view/view.html', {itemIndex:ev.detail.itemIndex});
+            });
             //  responsible layout
             if (window.innerWidth < 500) {
                 imgListView.winControl.layout.orientation = 'vertical';
             }
             // appbar action 
-            var myAppBar = document.querySelector('.myAppBar'),
-                selectBar = myAppBar.winControl.getCommandById('select'),
+            var selectBar = myAppBar.winControl.getCommandById('select'),
                 searchBoxCon = myAppBar.winControl.getCommandById('searchBoxCon'),
                 cancle = myAppBar.winControl.getCommandById('cancle'),
                 myToolBar = document.querySelector('.myToolBar'),
@@ -71,16 +89,18 @@
                 }
 
             }
-            WinJS.xhr({ type: 'GET', url: 'http://konachan.com/post.json', responseType: 'json' }).done(function (result) {
-                var data = result.response;
-                fragment.removeChild(progress);
-                data.forEach(function (value, index, arry) {
-                    if (value.rating === 's') {
-                        Data.ListItem.push(value);
-                    }
+            if (!Data.ListItem.length) {
+                fragment.appendChild(progress);
+                WinJS.xhr({ type: 'GET', url: 'http://konachan.com/post.json', responseType: 'json' }).done(function (result) {
+                    var data = result.response;
+                    fragment.removeChild(progress);
+                    data.forEach(function (value, index, arry) {
+                        if (value.rating === 's') {
+                            Data.ListItem.push(value);
+                        }
+                    });
                 });
-                //dataList = WinJS.Binding.List(data);
-            });
+            }
         }
     });
 })();

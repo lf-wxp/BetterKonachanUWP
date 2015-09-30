@@ -3,8 +3,45 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
+    <link href="settings.css" rel="stylesheet" />
+    <script src="settings.js"></script>
 </head>
 <body>
-    <div>此处显示内容。</div>
+    <div claas="backgroundListTemplate" data-win-control="WinJS.Binding.Template">
+        <img src="#" alt="Alternate Text"  data-win-bind="src:pic"/>
+    </div>
+    <div class="setting">
+        <!--<div data-win-control="WinJS.UI.Hub" data-win-options="{orientation:'vertical'}">-->
+            <section class="security"  >
+                <header> <h2>安全模式</h2> </header>
+                <div data-win-control="WinJS.UI.ToggleSwitch" data-win-options="{checked:true}"></div>
+            </section>
+            <section class="folder" >
+                <header> <h2>文件保存路径</h2> </header>
+                <div class="folderItem">
+                    <button  class="icon">&#xe188</button>
+                    <span>E:\Pictures</span>
+                    <button data-win-control="WinJS.UI.Tooltip" data-win-options="{innerHTML: 'change the folder'}" class="icon change action">&#xe1DA</button>
+                    <button data-win-control="WinJS.UI.Tooltip" data-win-options="{innerHTML: 'reset default folder'}" class="icon reset action">&#xe10E</button>
+                </div>
+            </section>
+            <section class="background">
+                <header> <h2>背景</h2> </header>
+                <div class="backgroundList" data-win-control="WinJS.UI.ListView" data-win-options="{
+                        itemDataSource:'',
+                        itemTemplate:select('.backgroundListTemplate'),
+                        layout:{type:WinJS.UI.GridLayout}
+                     }">
+                </div>
+                <div class="backgroundPicker">
+                    <input type="file" class="" />
+                    <button class="win-button">浏览</button>
+                </div>
+            </section>
+        <!--</div>-->
+        
+        
+
+    </div>
 </body>
 </html>

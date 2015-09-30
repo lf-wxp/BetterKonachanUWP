@@ -21,57 +21,54 @@ body:after {
 }
 .mySplitContain {
     width:100%;
-}
-.mySplitContain{
+    height:100%;
     position:relative;
 }
-.appBarContain {
+.topAppBarContain {
     width:100%;
-    display:flex;
+    font-size:0px;
+}
+.topAppBarContain>button {
+    font-size:16px;
+    display:inline-block;
+    vertical-align:top;
+}
+.appBars {
+    width:calc(100% - 48px);
+    display:inline-flex;
+    font-size:14px;
+    vertical-align:top;
+    flex-flow:row nowrap;
     justify-content:space-between;
     align-items:stretch;
-    flex-flow:row nowrap;
+    background:#393939;
+    height:48px;
 }
-
-.fixContain{
+.fixName {
     flex:0 0 auto;
-    font-size:0px;
+    height:auto;
+    line-height:48px;
+    padding:0px 10px;
+    box-sizing:border-box;
 }
 .myAppBar {
     flex:1 1 auto;
+    box-sizing:border-box;
 }
 .myAppBar .win-commandicon {
     margin:11px;
-}
-.anotherPaneToggle {
-    display:inline-block;
-    vertical-align:top;
-}
-.fixName {
-    display:inline-block;
-    height:100%;      
-    vertical-align:top;
-    line-height:48px;
-    padding:0px 5px;
-    font-size:16px;
-    background:#393939;
 }
 .searchBox {
     margin-top:8px;
 }
 .pageContain {
     width:auto;
-    height:calc(100vh - 48px);
-    box-sizing:border-box;
-    position:relative;
-}
-.pageContain .fragment {
-    width:100%;
+    /*height:calc(100vh - 48px);*/
     height:100%;
     box-sizing:border-box;
     position:relative;
-
 }
+
 .textCommand {
     font-size:14px;
     height:100%;
@@ -82,14 +79,6 @@ body:after {
 }
 .textCommand:hover {
     color:#0033fb;
-}
-.myToolBar {
-    position:absolute;
-    left:0px;
-    bottom:0px;
-    opacity:0;
-    visibility:hidden;
-
 }
 .myAppBar .cancleBox.win-command {
     padding:0px;

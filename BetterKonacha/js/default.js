@@ -74,20 +74,14 @@
 
             args.setPromise(WinJS.UI.processAll().done(function () {
                 updateLayoutOneTime();
-                if (nav.location) {
-                    nav.history.current.initialPlaceholder = true;
-                    return nav.navigate(nav.location, nav.state);
-                } else {
-                    return nav.navigate(Application.navigator.home);
-                }
-                window.addEventListener('orientationchange', function (ev) {
-                    var myAppBar = document.querySelector('.myAppBar');
-                    if (window.orientation !== 0) {
-                        ['select', 'download'].forEach(function (value, index, array) {
-                            myAppBar.winControl.getCommandById(value).hidden = true;
-                        });
-                    }
-                }, false);
+                //window.addEventListener('orientationchange', function (ev) {
+                //    var myAppBar = document.querySelector('.myAppBar');
+                //    if (window.orientation !== 0) {
+                //        ['select', 'download'].forEach(function (value, index, array) {
+                //            myAppBar.winControl.getCommandById(value).hidden = true;
+                //        });
+                //    }
+                //}, false);
                 window.addEventListener('resize', function () {
                     //updateLayout();
                     //log(window.innerWidth);
@@ -99,6 +93,19 @@
                     //    updateLayout();
                     //}, 50);
                 }, false);
+
+                // system goback button
+                Windows.UI.Core.SystemNavigationManager.getForCurrentView().addEventListener('backrequested', function () {
+                    WinJS.Navigation.back();
+                });
+
+                if (nav.location) { // navigate to the home page
+                    nav.history.current.initialPlaceholder = true;
+                    return nav.navigate(nav.location, nav.state);
+                } else {
+                    return nav.navigate(Application.navigator.home);
+                }
+
             }));
         }
     };
