@@ -1,7 +1,8 @@
 ﻿(function () {
     "use strict";
     WinJS.Namespace.define('Data', {
-        ListItem: new WinJS.Binding.List([])
+        ListItem: new WinJS.Binding.List([]),
+        currentPage:1
     })
     //
     WinJS.UI.Pages.define('/pages/home/home.html', {
@@ -43,7 +44,7 @@
 
             // ListView invoked event 
             imgListView.winControl.addEventListener('iteminvoked', function (ev) {
-                WinJS.Navigation.navigate('/pages/view/view.html', {itemIndex:ev.detail.itemIndex});
+                WinJS.Navigation.navigate('/pages/view/view.html', { itemIndex: ev.detail.itemIndex });
             });
             //  responsible layout
             if (window.innerWidth < 500) {
@@ -57,7 +58,7 @@
                 animating = WinJS.Promise.wrap();
             cancle.hidden = true;
             selectBar.hidden = false;
-            selectBar.onclick=function () {
+            selectBar.onclick = function () {
                 imgListView.winControl.selectionMode = 'multi';
                 imgListView.winControl.tapBehavior = 'toggleSelect';
                 selectBar.hidden = true;
@@ -103,7 +104,7 @@
                     animating = animating.then(function () {
                         myToolBar.style.opacity = "1";
                         myToolBar.style.visibility = "visible";
-                        return WinJS.UI.Animation.showEdgeUI(myToolBar, {top:'48px',left:'0px'});
+                        return WinJS.UI.Animation.showEdgeUI(myToolBar, { top: '48px', left: '0px' });
                     });
                 }
             }
@@ -119,9 +120,10 @@
 
             }
             function getListData() {
-                WinJS.xhr({ type: 'GET', url: 'http://konachan.com/post.json', responseType: 'json' }).done(function (result) {
+                return WinJS.xhr({ type: 'GET', url: 'http://konachan.com/post.json?page='+Data.currentPage, responseType: 'json' }).then(function (result) {
                     var data = result.response;
-                    fragment.removeChild(progress);
+                    Data.currentPage += 1;
+                    document.querySelector('.fixName').textContent = Data.currentPage;
                     data.forEach(function (value, index, arry) {
                         var sizeInfo = value.width + "/" + value.height;
                         value['sizeInfo'] = sizeInfo;
@@ -137,8 +139,16 @@
             }
             function incrementalTemplate(template, data, getMoreData) {
                 return function (itemPromise) {
+                    var fetching;
                     return itemPromise.then(function (item) {
-                        //getMoreData();
+                        if (item.key === data.getItem(data.length - 1).key) {
+                            if (!fetching) {
+                                fetching = true;
+                                getMoreData().then(function () {
+                                    fetching = false;
+                                });
+                            }
+                        }
                         return template(itemPromise);
                     });
                 };
@@ -147,8 +157,9 @@
             imgListView.winControl.itemTemplate = incrementalTemplate(itemTemplate, Data.ListItem, getListData);
             if (!Data.ListItem.length) {
                 fragment.appendChild(progress);
-                getListData();
-                
+                getListData().then(function () {
+                    fragment.removeChild(progress);
+                });
             }
         }
     });
