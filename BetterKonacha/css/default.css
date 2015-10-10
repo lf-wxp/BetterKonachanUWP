@@ -1,6 +1,10 @@
 ﻿body {
    position:relative;
    background:black;
+   display:flex;
+   justify-content:space-between;
+   flex-flow:column nowrap;
+   align-items:stretch;
 }
 body:after {
     content:'';
@@ -9,12 +13,16 @@ body:after {
     position:absolute;
     left:0px;
     top:0px;
-    background:url(/images/7.jpg) no-repeat;
+    background-image:url(/images/backgrounds/default0.png);
+    background-repeat:no-repeat;
     background-size:cover;
     z-index:-1;
     opacity:0.2;
 }
 
+.mySplit {
+    flex:1 1 auto;
+}
 .mySplit.win-splitview-pane-closed .mySplitHeader {
     background:rgba(0,0,0,0.5);
     transition:background 0.2s linear;
@@ -27,6 +35,7 @@ body:after {
 .topAppBarContain {
     width:100%;
     font-size:0px;
+    flex:0 0 auto;
 }
 .topAppBarContain>button {
     font-size:16px;
@@ -41,7 +50,7 @@ body:after {
     flex-flow:row nowrap;
     justify-content:space-between;
     align-items:stretch;
-    background:#393939;
+    background:#202020;
     height:48px;
 }
 .fixName {
@@ -57,6 +66,9 @@ body:after {
 }
 .myAppBar .win-commandicon {
     margin:11px;
+}
+.myAppBar .win-toolbar-actionarea {
+    background:none!important;
 }
 .searchBox {
     margin-top:8px;
@@ -100,7 +112,7 @@ body:after {
         width:100%;
     }
     .anotherPaneToggle {
-        background:#393939!important;
+        background:#202020!important;
     }
     .selectBar {
         display:block!important;
@@ -116,7 +128,7 @@ body:after {
         width:100%;
     }
     .anotherPaneToggle {
-        background:#393939!important;
+        background:#202020!important;
     }
     .searchBox {
         display:none;
@@ -139,4 +151,30 @@ body:after {
     .myAppBar .downloadBar {
         display:none;
     }
+}
+.icon {
+    font-family: "Segoe UI Command", "Symbols";
+    letter-spacing: 0;
+    vertical-align: middle;
+    font-size: 20px;
+    margin: 0;
+    padding:10px;
+    background-position: 0 0;
+    background-origin: border-box;
+    display: inline-block;
+    background-size: 96px 48px;
+    outline: none;
+    color: #ffffff;
+    background:none;
+    border:none;
+}
+.icon.action:hover {
+    background:rgba(255, 255, 255, 0.1);
+}
+.mySplitNavContain div.active{
+    background:#393939;
+    pointer-events:none;
+}
+.mySplitNavContain .win-navbarcommand-button {
+    background:none;
 }

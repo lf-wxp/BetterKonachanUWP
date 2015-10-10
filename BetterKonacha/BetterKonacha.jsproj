@@ -60,7 +60,10 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <Content Include="default.html" />
-    <Content Include="images\7.jpg" />
+    <Content Include="images\backgrounds\default0.png" />
+    <Content Include="images\backgrounds\default1.jpg" />
+    <Content Include="images\backgrounds\default2.jpg" />
+    <Content Include="images\backgrounds\default3.jpg" />
     <Content Include="images\LockScreenLogo.scale-200.png" />
     <Content Include="images\SplashScreen.scale-200.png" />
     <Content Include="images\Square150x150Logo.scale-200.png" />
@@ -71,7 +74,9 @@
     <Content Include="js\default.js" />
     <Content Include="css\default.css" />
     <Content Include="js\dataStorage.js" />
+    <Content Include="js\downloadManager.js" />
     <Content Include="js\navigation.js" />
+    <Content Include="js\utilities.js" />
     <Content Include="pages\download\download.css" />
     <Content Include="pages\download\download.html" />
     <Content Include="pages\download\download.js" />
@@ -91,9 +96,6 @@
     <Content Include="WinJS\js\base.js" />
     <Content Include="WinJS\js\ui.js" />
     <None Include="BetterKonacha_TemporaryKey.pfx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="data\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
   <!-- To modify your build process, add your task inside one of the targets below then uncomment

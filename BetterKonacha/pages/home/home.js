@@ -3,9 +3,14 @@
     WinJS.Namespace.define('Data', {
         ListItem: new WinJS.Binding.List([])
     })
-    var list = Data.ListItem;
+    //
     WinJS.UI.Pages.define('/pages/home/home.html', {
         ready: function (element, options) {
+            //reset the DownloadListControl.control to null,
+            //prevent from the erros because of the existence of DownloadListControl.control
+            // in function showProgressing in downloadManager 
+            DownloadListControl.control = null;
+
             var progress = document.createElement('progress'),
                 fragment = element.querySelector('.fragment'),
                 imgListView = element.querySelector('.imgListView'),
@@ -13,10 +18,7 @@
                 fixNameText = fixName.textContent,
                 DeviceFamily = Windows.System.Profile.AnalyticsInfo.versionInfo.deviceFamily;//Windows.Mobile,Windows.Desktop
             fixName.textContent = 'Post';
-            progress.style.position = 'absolute';
-            progress.style.left = '0px';
-            progress.style.width = '100%';
-            progress.style.top = '5px';
+            progress.className = 'win-ring win-medium';
 
 
             var myAppBar = document.querySelector('.myAppBar'),
@@ -53,6 +55,8 @@
                 cancle = myAppBar.winControl.getCommandById('cancle'),
                 myToolBar = document.querySelector('.myToolBar'),
                 animating = WinJS.Promise.wrap();
+            cancle.hidden = true;
+            selectBar.hidden = false;
             selectBar.onclick=function () {
                 imgListView.winControl.selectionMode = 'multi';
                 imgListView.winControl.tapBehavior = 'toggleSelect';
@@ -69,6 +73,31 @@
                 hideTheBottomToolBarMobileOnly();
                 fixName.textContent = fixNameText;
             }
+
+            // add picture to download list with toolbar and appbar
+            var downloadToolBar = myToolBar.winControl.getCommandById('download'),
+                downloadAppBar = myAppBar.winControl.getCommandById('download');
+            function downloadToListHandle() {
+                var count = imgListView.winControl.selection;
+                if (imgListView.winControl.selection.count()) {
+                    imgListView.winControl.selection.getItems().done(function (items) {
+                        items.forEach(function (value, index, array) {
+                            var imgUri = {
+                                "preview": value.data.preview_url,
+                                "picture": value.data.file_url
+                            }
+                            DownloadManager.startUnconstrainedDownload(imgUri);
+                        });
+                        cancle.onclick();
+                    });
+                }
+            }
+            downloadToolBar.addEventListener('click', downloadToListHandle);
+
+            // use the old way to bind event to the downloadAppBar, 
+            //beacuse the new event handle function just rewrite the elder handle instead of as a new one added to the downloadAppBar
+            downloadAppBar.onclick = downloadToListHandle;
+
             function showTheBottomToolBarMobileOnly() {
                 if (DeviceFamily === 'Windows.Mobile' && window.orientation == 0) {
                     animating = animating.then(function () {
@@ -89,17 +118,37 @@
                 }
 
             }
-            if (!Data.ListItem.length) {
-                fragment.appendChild(progress);
+            function getListData() {
                 WinJS.xhr({ type: 'GET', url: 'http://konachan.com/post.json', responseType: 'json' }).done(function (result) {
                     var data = result.response;
                     fragment.removeChild(progress);
                     data.forEach(function (value, index, arry) {
-                        if (value.rating === 's') {
+                        var sizeInfo = value.width + "/" + value.height;
+                        value['sizeInfo'] = sizeInfo;
+                        if (Settings.defaultSetting.securityMode) {
+                            if (value.rating === 's') {
+                                Data.ListItem.push(value);
+                            }
+                        } else {
                             Data.ListItem.push(value);
                         }
                     });
                 });
+            }
+            function incrementalTemplate(template, data, getMoreData) {
+                return function (itemPromise) {
+                    return itemPromise.then(function (item) {
+                        //getMoreData();
+                        return template(itemPromise);
+                    });
+                };
+            }
+            var itemTemplate = imgListView.winControl.itemTemplate;
+            imgListView.winControl.itemTemplate = incrementalTemplate(itemTemplate, Data.ListItem, getListData);
+            if (!Data.ListItem.length) {
+                fragment.appendChild(progress);
+                getListData();
+                
             }
         }
     });

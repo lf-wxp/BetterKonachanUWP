@@ -1,2 +1,74 @@
-﻿body {
+﻿.download {
+    height:100%;
+    width:100%;
+}
+.downloadList {
+    width:100%;
+    height:100%;
+}
+.downloadList .win-surface {
+    width:100%;
+    height:100%;
+}
+.downloadList .win-container {
+    width:130px;
+    height:60px;
+    overflow:hidden;
+}
+.downloadListItem {
+    position:relative;
+    padding-bottom:3px;
+    padding-right:30px;
+}
+.downloadListItemImg {
+    width:100px;
+    height:57px;
+    overflow:hidden;
+    position:relative;
+}
+
+.downloadAction {
+    position:absolute;
+    right:0px;
+    top:0px;
+    width:30px;
+}
+.downloadAction button {
+    cursor:pointer;
+    font-size:14px;
+    padding:8px;
+    background:#393939;
+}
+.downloadAction .hidden {
+    display:none;
+}
+.downloadAction button:hover {
+    background:rgba(255, 255, 255, 0.3);
+}
+.downloadListItemImg img {
+    width:100px;
+}
+.downloadListItem progress {
+    height:5px;
+    bottom:0px;
+    width:100px;
+    position:absolute;
+}
+.downloadListItem progress[value='100'] {
+    border:none;
+}
+.downloadListItem progress[value='100']::-ms-fill {
+    background-color:#5bbd72;
+    border-color:#5bbd72;
+
+}
+.downloadListItem[data-error='true'] progress{
+    border:none;
+}
+.downloadListItem[data-error='true'] progress::-ms-fill {
+    background-color: rgb(255, 65, 54);
+    border-color:rgb(255, 65, 54);
+}
+.downloadList .win-itembox  {
+    background:none;
 }

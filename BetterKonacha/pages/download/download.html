@@ -7,6 +7,29 @@
     <script src="download.js"></script>
 </head>
 <body>
-    <div>此处显示内容。</div>
+    <div class="downloadListTemplate" style="display:none" data-win-control="WinJS.Binding.Template">
+        <div class="downloadListItem" data-error="" data-win-bind="this['data-error']:error WinJS.Binding.setAttribute">
+            <div class="downloadListItemImg" data-finished="" data-win-bind="this['data-finished']:finished WinJS.Binding.setAttribute">
+                <img src="" alt="" data-win-bind="src:preview" />
+            </div>
+            <div class="downloadAction" data-guid="" data-win-bind="this['data-guid']:guid WinJS.Binding.setAttribute">
+                <button class="icon hidden" data-role="play">&#xe102</button><!--play-->
+                <button class="icon" data-role="pause">&#xe103</button><!--pause-->
+                <button class="icon" data-role="clear">&#xe106</button><!--clear-->
+            </div>
+            <progress value="0" max="100"  data-win-bind="value:receiveData"></progress>
+        </div>
+    </div>
+    <div class="download">
+        <div class="downloadList win-selectionstylefilled changeLayout" data-win-control="WinJS.UI.ListView" data-win-options="{
+                itemDataSource:Data.downloadItem.dataSource,
+                itemTemplate:select('.downloadListTemplate'),
+                layout:{type:WinJS.UI.GridLayout},
+                tapBehavior:'none',
+                swipeBehavior:'none',
+                selectionMode:'none'
+             }">
+        </div>
+    </div>
 </body>
 </html>

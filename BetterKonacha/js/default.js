@@ -15,24 +15,19 @@
     view.titleBar.buttonForegroundColor = Windows.UI.Colors.white;
     view.titleBar.foregroundColor = Windows.UI.Colors.white;
 
-
     // responsible design function 
-    function updateLayout() {
-        var mySplit = document.querySelector('.mySplit'),
-            myToolBar = document.querySelector('.myAppBar');
-        var width = window.innerWidth;
-        myToolBar.winControl.forceLayout();
-
-    }
     function updateLayoutOneTime() {
         var mySplit = document.querySelector('.mySplit'),
             myAppBar = document.querySelector('.myAppBar'),
             searchBar = document.querySelector('.searchBar'),
             DeviceFamily = Windows.System.Profile.AnalyticsInfo.versionInfo.deviceFamily;//Windows.Mobile,Windows.Desktop
-        if ( DeviceFamily === 'Windows.Mobile') {
+
+        // 
+
+        if (DeviceFamily === 'Windows.Mobile') {
             mySplit.winControl.closedDisplayMode = "none";
         }
-        if (window.innerWidth <= 320 ) {
+        if (window.innerWidth <= 320) {
             var search = myAppBar.winControl.getCommandById('search');
             search.hidden = false;
             searchBar.winControl.addEventListener('click', function () {
@@ -58,6 +53,13 @@
         if (args.detail.kind === activation.ActivationKind.launch) {
             if (args.detail.previousExecutionState !== activation.ApplicationExecutionState.terminated) {
                 //TODO: 已经新启动此应用程序。请在此初始化你的应用程序。
+
+                // initialize the settings 
+                Settings.initializeSettings().done(function () {
+                    // set the background image
+                    Utilities.setBackground(Settings.defaultSetting.backgroundImage);
+                });
+
             } else {
                 // TODO: 此应用程序已挂起，然后终止。
                 // 若要创造顺畅的用户体验，请在此处还原应用程序状态，使应用似乎永不停止运行。
@@ -74,14 +76,20 @@
 
             args.setPromise(WinJS.UI.processAll().done(function () {
                 updateLayoutOneTime();
-                //window.addEventListener('orientationchange', function (ev) {
-                //    var myAppBar = document.querySelector('.myAppBar');
-                //    if (window.orientation !== 0) {
-                //        ['select', 'download'].forEach(function (value, index, array) {
-                //            myAppBar.winControl.getCommandById(value).hidden = true;
-                //        });
-                //    }
-                //}, false);
+
+                // when change the mobile device orientation,change the orientation of layout of ListView. 
+                window.addEventListener('orientationchange', function (ev) {
+                    var listview = document.querySelector('.pageContain .changeLayout');
+                    if (listview) {
+                        if (window.orientation !== 0) {
+                            listview.winControl.layout.orientation = 'horizontal';
+                        } else {
+                            listview.winControl.layout.orientation = 'vertical';
+                        }
+                    }
+                    
+                }, false);
+
                 window.addEventListener('resize', function () {
                     //updateLayout();
                     //log(window.innerWidth);

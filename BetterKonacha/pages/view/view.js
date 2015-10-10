@@ -2,6 +2,8 @@
     "use strict";
     WinJS.UI.Pages.define('/pages/view/view.html', {
         ready: function (element, options) {
+            DownloadListControl.control = null;
+
             // style the ui 
             var appBars = document.querySelector('.appBars'),
                 splitView = document.querySelector('.mySplit'),
@@ -35,6 +37,18 @@
             flipView.addEventListener('pageselected', function (ev) {
                 var item = Data.ListItem.getAt(flipView.currentPage);
                 rectField.textContent = item.width + " X " + item.height;
+            });
+
+            // the download bar actio in ToolBar
+            var myViewToolBar = element.querySelector('.myViewToolBar'),
+            downloadBar = myViewToolBar.winControl.getCommandById('download');
+            downloadBar.addEventListener('click', function () {
+                var item = Data.ListItem.getAt(options.itemIndex),
+                    imgUri = {
+                        "preview": item.preview_url,
+                        "picture": item.file_url
+                    }
+                DownloadManager.startUnconstrainedDownload(imgUri);
             });
         }
 

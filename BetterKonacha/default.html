@@ -12,9 +12,11 @@
 
     <!-- uwpUI 引用 -->
     <link href="/css/default.css" rel="stylesheet" />
+    <script src="js/utilities.js"></script>
     <script src="js/dataStorage.js"></script>
-    <script src="/js/default.js"></script>
+    <script src="js/downloadManager.js"></script>
     <script src="js/navigation.js"></script>
+    <script src="/js/default.js"></script>
 
 </head>
 <body class="win-type-body">
@@ -42,9 +44,9 @@
     <div class="mySplit" data-win-control="WinJS.UI.SplitView" data-win-options="{openedDisplayMode:'overlay'}" >
         <div class="mySplitHeader">
             <div class="mySplitNavContain">
-                <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Home', icon: 'home',location:'/pages/home/home.html'}"></div>
-                <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Setting', icon: 'settings',location:'/pages/settings/settings.html'}"></div>
-                <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'download', icon: 'download',location:'/pages/download/download.html'}"></div>
+                <div class='active' data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Home', icon: 'home',location:'/pages/home/home.html',onclick:Utilities.navBarSwitch}"></div>
+                <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Setting', icon: 'settings',location:'/pages/settings/settings.html',onclick:Utilities.navBarSwitch}"></div>
+                <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'download', icon: 'download',location:'/pages/download/download.html',onclick:Utilities.navBarSwitch}"></div>
             </div>
         </div>
         <div class="mySplitContain">

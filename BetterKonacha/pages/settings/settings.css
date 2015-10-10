@@ -32,35 +32,8 @@
     position: relative;
 }
 
-    .backgroundPicker input {
-        display: none;
-    }
-
-    .backgroundPicker button {
-    }
-
 .backgroundList {
     height: 100px;
-}
-
-.icon {
-    font-family: "Segoe UI Command", "Symbols";
-    letter-spacing: 0;
-    vertical-align: middle;
-    font-size: 20px;
-    margin: 0;
-    padding:10px;
-    background-position: 0 0;
-    background-origin: border-box;
-    display: inline-block;
-    background-size: 96px 48px;
-    outline: none;
-    color: #ffffff;
-    background:none;
-    border:none;
-}
-.icon.action:hover {
-    background:rgba(255, 255, 255, 0.1);
 }
 .folderItem {
     transition:background 0.2s ease;
@@ -72,4 +45,9 @@
 }
 .folderItem:hover {
     background:#393939;
+}
+.backgroundListItem {
+    width:100px;
+    height:50px;
+    overflow:hidden;
 }

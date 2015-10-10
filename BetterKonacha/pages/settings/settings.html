@@ -4,44 +4,43 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
     <link href="settings.css" rel="stylesheet" />
+    <script src="../../js/utilities.js"></script>
     <script src="settings.js"></script>
 </head>
 <body>
-    <div claas="backgroundListTemplate" data-win-control="WinJS.Binding.Template">
-        <img src="#" alt="Alternate Text"  data-win-bind="src:pic"/>
+    <div class="backgroundListTemplate" data-win-control="WinJS.Binding.Template" style="display:none;">
+        <div class="backgroundListItem">
+            <img src="#" alt="Alternate Text" data-win-bind="src:pic" width="100" />
+        </div>
+        
     </div>
     <div class="setting">
-        <!--<div data-win-control="WinJS.UI.Hub" data-win-options="{orientation:'vertical'}">-->
             <section class="security"  >
                 <header> <h2>安全模式</h2> </header>
-                <div data-win-control="WinJS.UI.ToggleSwitch" data-win-options="{checked:true}"></div>
+                <div data-win-control="WinJS.UI.ToggleSwitch" data-win-options="{checked:true}" class="securityToggle"></div>
             </section>
             <section class="folder" >
                 <header> <h2>文件保存路径</h2> </header>
                 <div class="folderItem">
                     <button  class="icon">&#xe188</button>
-                    <span>E:\Pictures</span>
-                    <button data-win-control="WinJS.UI.Tooltip" data-win-options="{innerHTML: 'change the folder'}" class="icon change action">&#xe1DA</button>
-                    <button data-win-control="WinJS.UI.Tooltip" data-win-options="{innerHTML: 'reset default folder'}" class="icon reset action">&#xe10E</button>
+                    <span></span>
+                    <button data-win-control="WinJS.UI.Tooltip" data-win-options="{innerHTML: 'select a new folder'}" class="icon change action">&#xe1DA</button>
+                    <button data-win-control="WinJS.UI.Tooltip" data-win-options="{innerHTML: 'reset the default folder'}" class="icon reset action">&#xe10E</button>
                 </div>
             </section>
             <section class="background">
                 <header> <h2>背景</h2> </header>
                 <div class="backgroundList" data-win-control="WinJS.UI.ListView" data-win-options="{
-                        itemDataSource:'',
+                        itemDataSource:Data.BackgroundItemList.dataSource,
                         itemTemplate:select('.backgroundListTemplate'),
-                        layout:{type:WinJS.UI.GridLayout}
+                        layout:{type:WinJS.UI.GridLayout},
+                        tapBehavior:'directSelect',
+                        swipeBehavior:'select',
+                        selectionMode:'single'
                      }">
                 </div>
-                <div class="backgroundPicker">
-                    <input type="file" class="" />
-                    <button class="win-button">浏览</button>
-                </div>
+                <button class="win-button backgroundPicker">浏览</button>
             </section>
-        <!--</div>-->
-        
-        
-
     </div>
 </body>
 </html>
