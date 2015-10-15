@@ -1,0 +1,20 @@
+﻿{
+    "downloadMessage": "图片已经加入下载列表",
+    "post":"图片",
+    "downloadList":"下载列表",
+    "setting":"设置",
+    "securityMode":"安全模式",
+    "savedPath":"文件保存路径",
+    "background":"背景图片",
+    "download":"下载",
+    "download.commet":"下载选中的图片",
+    "home":"主页",
+    "search":"搜索",
+    "search.commet":"按标签搜索",
+    "select":"选择",
+    "select.commet":"选择图片",
+    "cancel":"取消",
+    "itemselected":" 项目选中",
+    "selectnewfolder":"选择新目录",
+    "resetdefaultfolder":"重置为默认目录"
+}

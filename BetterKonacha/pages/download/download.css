@@ -65,6 +65,9 @@
 .downloadListItem[data-error='true'] progress{
     border:none;
 }
+.downloadListItem[data-error='true'] progress[value='0']{
+    background:red;
+}
 .downloadListItem[data-error='true'] progress::-ms-fill {
     background-color: rgb(255, 65, 54);
     border-color:rgb(255, 65, 54);

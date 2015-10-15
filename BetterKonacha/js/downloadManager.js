@@ -10,7 +10,7 @@
         "error":true
     }];
     WinJS.Namespace.define('Data', {
-        downloadItem: new WinJS.Binding.List()
+        downloadItem: new WinJS.Binding.List([])
     });
     WinJS.Namespace.define('DownloadListControl', {
         control: null
@@ -222,12 +222,18 @@
             }
         }
         //remove the file that is created by the canceled download operation
-        function removeCancelDownloadFile(){
-            Windows.Storage.StorageFolder.getFolderFromPathAsync(Settings.defaultSetting.savedPath).done(function (folder) {
-                folder.getFileAsync(fileName).done(function (file) {
+        function removeCancelDownloadFile() {
+            if (Settings.defaultSetting.savedPath == Windows.Storage.KnownFolders.savedPictures.path) {
+                Windows.Storage.KnownFolders.savedPictures.getFileAsync(fileName).done(function (file) {
                     file.deleteAsync();
                 });
-            });
+            } else {
+                Windows.Storage.StorageFolder.getFolderFromPathAsync(Settings.defaultSetting.savedPath).done(function (folder) {
+                    folder.getFileAsync(fileName).done(function (file) {
+                        file.deleteAsync();
+                    });
+                });
+            }
         }
         // Completion callback.
         function complete() {
@@ -245,8 +251,10 @@
         // Error callback.
         function error(err) {
             if (download) {
+                if (err.name !== "Canceled") {
+                    errorAction();
+                }
                 removeDownload(download.guid);
-                errorAction();
                 //printLog(download.guid + " - download completed with error.<br/>");
             }
             //displayException(err);

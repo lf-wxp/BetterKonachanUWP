@@ -7,7 +7,7 @@
         defaultSetting = {
             'securityMode': true,
             'savedPath': Windows.Storage.KnownFolders.savedPictures.path,
-            'backgroundImage': ''
+            'backgroundImage': '/images/backgrounds/default0.jpg'
         },
         roamingSettingKeys = ['securityMode'];
 
@@ -38,7 +38,7 @@
     }
 
     function getRoamingSettingsFromFile() {
-        return oamingFolder.getFileAsync("settingRoamingJson.json")
+        return roamingFolder.getFileAsync("settingRoamingJson.json")
           .then(function (file) {
               return Windows.Storage.FileIO.readTextAsync(file);
           }).done(function (settingsString) {

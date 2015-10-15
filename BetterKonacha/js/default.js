@@ -6,7 +6,6 @@
     var app = WinJS.Application;
     var activation = Windows.ApplicationModel.Activation;
     var nav = WinJS.Navigation;
-
     // change the background color of the title bar 
     var view = Windows.UI.ViewManagement.ApplicationView.getForCurrentView();
     view.titleBar.backgroundColor = Windows.UI.Colors.black;
@@ -58,6 +57,7 @@
                 Settings.initializeSettings().done(function () {
                     // set the background image
                     Utilities.setBackground(Settings.defaultSetting.backgroundImage);
+                    TileUpdate.updateTile();
                 });
 
             } else {
@@ -76,7 +76,7 @@
 
             args.setPromise(WinJS.UI.processAll().done(function () {
                 updateLayoutOneTime();
-
+                WinJS.Resources.processAll();
                 // when change the mobile device orientation,change the orientation of layout of ListView. 
                 window.addEventListener('orientationchange', function (ev) {
                     var listview = document.querySelector('.pageContain .changeLayout');

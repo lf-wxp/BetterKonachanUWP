@@ -1,0 +1,20 @@
+﻿{
+    "downloadMessage": "Files have add to the download list already",
+    "post":"POST",
+    "downloadList":"DonwloadList",
+    "setting":"Settings",
+    "securityMode":"securityMode",
+    "savedPath":"savedPath",
+    "background":"background image",
+    "download":"Download",
+    "download.commet":"Download the selected picture",
+    "home":"Home",
+    "search":"Search",
+    "search.commet":"Search for tags",
+    "select":"Select",
+    "select.commet":"Select pictures",
+    "cancel":"Cancel",
+    "itemselected":" items selected",
+    "selectnewfolder":"Select a new folder",
+    "resetdefaultfolder":"Reset the default folder"
+}

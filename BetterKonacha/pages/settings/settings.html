@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
     <link href="settings.css" rel="stylesheet" />
     <script src="../../js/utilities.js"></script>
@@ -12,24 +12,30 @@
         <div class="backgroundListItem">
             <img src="#" alt="Alternate Text" data-win-bind="src:pic" width="100" />
         </div>
-        
+
     </div>
     <div class="setting">
-            <section class="security"  >
-                <header> <h2>安全模式</h2> </header>
+        <div style="display:none;">
+                <div id="selectnewfolder" data-win-res="{textContent:'selectnewfolder'}">
+                </div>
+                <div id="resetdefaultfolder" data-win-res="{textContent:'resetdefaultfolder'}">
+                </div>
+            </div>
+            <section class="security">
+                <header> <h2 data-win-res="{textContent:'securityMode'}"></h2> </header>
                 <div data-win-control="WinJS.UI.ToggleSwitch" data-win-options="{checked:true}" class="securityToggle"></div>
             </section>
-            <section class="folder" >
-                <header> <h2>文件保存路径</h2> </header>
+            <section class="folder">
+                <header> <h2 data-win-res="{textContent:'savedPath'}"></h2> </header>
                 <div class="folderItem">
-                    <button  class="icon">&#xe188</button>
+                    <button class="icon">&#xe188</button>
                     <span></span>
-                    <button data-win-control="WinJS.UI.Tooltip" data-win-options="{innerHTML: 'select a new folder'}" class="icon change action">&#xe1DA</button>
-                    <button data-win-control="WinJS.UI.Tooltip" data-win-options="{innerHTML: 'reset the default folder'}" class="icon reset action">&#xe10E</button>
+                    <button data-win-control="WinJS.UI.Tooltip" data-win-options="{infotip:true,contentElement:selectnewfolder}" class="icon change action">&#xe1DA</button>
+                    <button data-win-control="WinJS.UI.Tooltip" data-win-options="{infotip:true,contentElement:resetdefaultfolder}" class="icon reset action">&#xe10E</button>
                 </div>
             </section>
             <section class="background">
-                <header> <h2>背景</h2> </header>
+                <header> <h2 data-win-res="{textContent:'background'}"></h2> </header>
                 <div class="backgroundList" data-win-control="WinJS.UI.ListView" data-win-options="{
                         itemDataSource:Data.BackgroundItemList.dataSource,
                         itemTemplate:select('.backgroundListTemplate'),
@@ -41,6 +47,6 @@
                 </div>
                 <button class="win-button backgroundPicker">浏览</button>
             </section>
-    </div>
+        </div>
 </body>
 </html>

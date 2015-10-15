@@ -5,11 +5,14 @@
     });
     WinJS.UI.Pages.define('/pages/settings/settings.html', {
         ready: function (element, options) {
+            WinJS.Resources.processAll(element);
             DownloadListControl.control = null;
             // style the ui 
             var myAppBar = document.querySelector('.myAppBar'),
-                fixName = document.querySelector('.fixName');
-            fixName.textContent = 'Setting';
+                fixName = document.querySelector('.fixName'),
+                resSettings = WinJS.Resources.getString('setting');
+
+            fixName.textContent = resSettings.value;
             myAppBar.style.display = 'none';
 
 
@@ -100,9 +103,6 @@
                 });
 
             }, false);
-            
-
         }
-
     });
 })();

@@ -3,8 +3,8 @@
   <Identity Name="05353d94-d842-4b60-a5d1-3f683f519e87" Version="1.0.0.0" Publisher="CN=frontend" />
   <mp:PhoneIdentity PhoneProductId="05353d94-d842-4b60-a5d1-3f683f519e87" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>uwpUI</DisplayName>
-    <PublisherDisplayName>frontend</PublisherDisplayName>
+    <DisplayName>BetterKonachan</DisplayName>
+    <PublisherDisplayName>Franciscowxp</PublisherDisplayName>
     <Logo>images\storelogo.png</Logo>
   </Properties>
   <Dependencies>
@@ -15,8 +15,13 @@
   </Resources>
   <Applications>
     <Application Id="App" StartPage="default.html">
-      <uap:VisualElements DisplayName="BetterKonacha" Description="BetterKonacha" BackgroundColor="transparent" Square150x150Logo="images\Square150x150Logo.png" Square44x44Logo="images\Square44x44Logo.png">
-        <uap:DefaultTile Wide310x150Logo="images\Wide310x150Logo.png">
+      <uap:VisualElements DisplayName="BetterKonachan" Description="BetterKonachan" BackgroundColor="transparent" Square150x150Logo="images\Square150x150Logo.png" Square44x44Logo="images\Square44x44Logo.png">
+        <uap:LockScreen Notification="badge" BadgeLogo="images\BadgeLogo.png" />
+        <uap:DefaultTile Wide310x150Logo="images\Wide310x150Logo.png" Square310x310Logo="images\Square310x310Logo.png" Square71x71Logo="images\Square71x71Logo.png">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo" />
+            <uap:ShowOn Tile="square310x310Logo" />
+          </uap:ShowNameOnTiles>
         </uap:DefaultTile>
         <uap:SplashScreen Image="images\splashscreen.png" />
       </uap:VisualElements>
@@ -25,5 +30,6 @@
   <Capabilities>
     <Capability Name="internetClient" />
     <uap:Capability Name="picturesLibrary" />
+    <uap:Capability Name="removableStorage" />
   </Capabilities>
 </Package>

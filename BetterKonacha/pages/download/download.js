@@ -3,10 +3,12 @@
     WinJS.UI.Pages.define('/pages/download/download.html', {
         ready: function (element, options) {
             // style the ui 
+            WinJS.Resources.processAll(element);
             var myAppBar = document.querySelector('.myAppBar'),
                 fixName = document.querySelector('.fixName'),
-                downloadListView = element.querySelector('.downloadList');
-            fixName.textContent = 'Download List';
+                downloadListView = element.querySelector('.downloadList'),
+                resDownloadList = WinJS.Resources.getString('downloadList');
+            fixName.textContent = resDownloadList.value;
             myAppBar.style.display = 'none';
             DownloadListControl.control = downloadListView.winControl;
             var downloadListView = DownloadListControl.control;

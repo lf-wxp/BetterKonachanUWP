@@ -94,6 +94,8 @@ body:after {
 }
 .myAppBar .cancleBox.win-command {
     padding:0px;
+    width:46px;
+    text-align:center;
 }
 @media screen and (min-width:500px) and (min-device-width:1200px) {
     .searchBar {
@@ -176,5 +178,8 @@ body:after {
     pointer-events:none;
 }
 .mySplitNavContain .win-navbarcommand-button {
-    background:none;
+    /*background:none;*/
+}
+.messageFlyout.win-flyout {
+    border:none;
 }

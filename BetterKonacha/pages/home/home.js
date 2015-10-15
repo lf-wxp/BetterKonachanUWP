@@ -1,24 +1,25 @@
 ﻿(function () {
     "use strict";
     WinJS.Namespace.define('Data', {
-        ListItem: new WinJS.Binding.List([]),
-        currentPage:1
+        listItem: new WinJS.Binding.List([]),
+        searchTag: ''
     })
-    //
     WinJS.UI.Pages.define('/pages/home/home.html', {
         ready: function (element, options) {
             //reset the DownloadListControl.control to null,
             //prevent from the erros because of the existence of DownloadListControl.control
             // in function showProgressing in downloadManager 
             DownloadListControl.control = null;
-
+            WinJS.Resources.processAll(element);
             var progress = document.createElement('progress'),
                 fragment = element.querySelector('.fragment'),
                 imgListView = element.querySelector('.imgListView'),
                 fixName = document.querySelector('.fixName'),
                 fixNameText = fixName.textContent,
+                resPost = WinJS.Resources.getString('post'),
+                resItemSelected = WinJS.Resources.getString('itemselected'),
                 DeviceFamily = Windows.System.Profile.AnalyticsInfo.versionInfo.deviceFamily;//Windows.Mobile,Windows.Desktop
-            fixName.textContent = 'Post';
+            fixName.textContent = resPost.value;
             progress.className = 'win-ring win-medium';
 
 
@@ -39,7 +40,7 @@
             //ListView selectionchanged event 
             imgListView.winControl.addEventListener('selectionchanged', function () {
                 var num = imgListView.winControl.selection.count();
-                fixName.textContent = num + ' items selected';
+                fixName.textContent = num + resItemSelected.value;
             });
 
             // ListView invoked event 
@@ -53,14 +54,17 @@
             // appbar action 
             var selectBar = myAppBar.winControl.getCommandById('select'),
                 searchBoxCon = myAppBar.winControl.getCommandById('searchBoxCon'),
+                searchBox = document.querySelector('.searchBox'),
                 cancle = myAppBar.winControl.getCommandById('cancle'),
                 myToolBar = document.querySelector('.myToolBar'),
-                animating = WinJS.Promise.wrap();
+                animating = WinJS.Promise.wrap(),
+                fixNameTextBackUp;
             cancle.hidden = true;
             selectBar.hidden = false;
             selectBar.onclick = function () {
                 imgListView.winControl.selectionMode = 'multi';
                 imgListView.winControl.tapBehavior = 'toggleSelect';
+                fixNameTextBackUp = fixName.textContent;
                 selectBar.hidden = true;
                 cancle.hidden = false;
                 showTheBottomToolBarMobileOnly();
@@ -72,7 +76,7 @@
                 cancle.hidden = true;
                 selectBar.hidden = false;
                 hideTheBottomToolBarMobileOnly();
-                fixName.textContent = fixNameText;
+                fixName.textContent = fixNameTextBackUp;
             }
 
             // add picture to download list with toolbar and appbar
@@ -88,6 +92,7 @@
                                 "picture": value.data.file_url
                             }
                             DownloadManager.startUnconstrainedDownload(imgUri);
+                            Utilities.messageOutIn();
                         });
                         cancle.onclick();
                     });
@@ -119,23 +124,28 @@
                 }
 
             }
+            var currentPage = 1;
             function getListData() {
-                return WinJS.xhr({ type: 'GET', url: 'http://konachan.com/post.json?page='+Data.currentPage, responseType: 'json' }).then(function (result) {
+                return WinJS.xhr({ type: 'GET', url: 'http://konachan.com/post.json?page='+currentPage+"&tags="+Data.searchTag, responseType: 'json' }).then(function (result) {
                     var data = result.response;
-                    Data.currentPage += 1;
-                    document.querySelector('.fixName').textContent = Data.currentPage;
+                    currentPage += 1;
                     data.forEach(function (value, index, arry) {
                         var sizeInfo = value.width + "/" + value.height;
                         value['sizeInfo'] = sizeInfo;
                         if (Settings.defaultSetting.securityMode) {
                             if (value.rating === 's') {
-                                Data.ListItem.push(value);
+                                Data.listItem.push(value);
                             }
                         } else {
-                            Data.ListItem.push(value);
+                            Data.listItem.push(value);
                         }
                     });
                 });
+            }
+            function clearUpDataSource() {
+                while (Data.listItem.length) {
+                    Data.listItem.splice(0, 1);
+                }
             }
             function incrementalTemplate(template, data, getMoreData) {
                 return function (itemPromise) {
@@ -154,10 +164,26 @@
                 };
             }
             var itemTemplate = imgListView.winControl.itemTemplate;
-            imgListView.winControl.itemTemplate = incrementalTemplate(itemTemplate, Data.ListItem, getListData);
-            if (!Data.ListItem.length) {
+            imgListView.winControl.itemTemplate = incrementalTemplate(itemTemplate, Data.listItem, getListData);
+            if (!Data.listItem.length) {
                 fragment.appendChild(progress);
                 getListData().then(function () {
+                    fragment.removeChild(progress);
+                });
+            }
+
+            // the search function
+            searchBox.winControl.queryText = Data.searchTag;
+            searchBox.winControl.onquerychanged = function (ev) {
+                Data.searchTag = ev.detail.queryText;
+                fixName.textContent = Data.searchTag;
+            }
+            searchBox.winControl.onquerysubmitted = function (ev) {
+                currentPage = 1;
+                clearUpDataSource();
+                fragment.appendChild(progress);
+                getListData().then(function () {
+                    var len = Data.listItem.length;
                     fragment.removeChild(progress);
                 });
             }

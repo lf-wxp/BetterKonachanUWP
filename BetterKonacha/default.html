@@ -10,43 +10,44 @@
     <script src="WinJS/js/base.js"></script>
     <script src="WinJS/js/ui.js"></script>
 
-    <!-- uwpUI 引用 -->
+    <!-- BetterKonchanUI 引用 -->
     <link href="/css/default.css" rel="stylesheet" />
     <script src="js/utilities.js"></script>
     <script src="js/dataStorage.js"></script>
     <script src="js/downloadManager.js"></script>
     <script src="js/navigation.js"></script>
+    <script src="js/notificationTile.js"></script>
     <script src="/js/default.js"></script>
-
+    
 </head>
 <body class="win-type-body">
+    <div data-win-control="WinJS.UI.Flyout" style="display:none;" class="messageFlyout" data-win-options="{placement:'top'}">
+        <div data-win-res="{textContent:'downloadMessage'}" ></div>
+    </div>
     <div class="topAppBarContain">
         <button data-win-control="WinJS.UI.SplitViewPaneToggle" data-win-options="{splitView:select('.mySplit')}" class="anotherPaneToggle"></button>
         <div class="appBars">
-            <div class="fixName">POST</div>
+            <div class="fixName" data-win-res="{textContent:'post'}"></div>
                 <div class="myAppBar" data-win-control="WinJS.UI.ToolBar" data-win-options="{placement:'top'}">
                     <div data-win-control="WinJS.UI.Command" data-win-options="{id:'searchBoxCon',type:'content'}" class="searchBoxCon">
-                        <div class="win-interactive searchBox" data-win-control="WinJS.UI.AutoSuggestBox" data-win-options="{placeholderText:'Search for tags'}"></div>
+                        <div class="win-interactive searchBox" data-win-control="WinJS.UI.AutoSuggestBox" data-win-res="{winControl:{placeholderText:'search.commet'}}"></div>
                     </div>
                     <div data-win-control="WinJS.UI.Command" data-win-options="{id:'cancle',type:'content',hidden:true}" class="cancleBox">
-                        <div class="textCommand">
-                            cancle
+                        <div class="textCommand" data-win-res="{textContent:'cancel'}">
                         </div>
                     </div>
-                    <button data-win-control="WinJS.UI.Command" data-win-options="{id:'search',icon:'zoom',label:'search',tooltip:'search for tags',hidden:true}" class="searchBar"></button>
-                    <button data-win-control="WinJS.UI.Command" data-win-options="{id:'select',label:'select',icon:'list',tooltip:'selection'}" class="selectBar"></button>
-                    <button data-win-control="WinJS.UI.Command" data-win-options="{id:'download',label:'download',icon:'download',tooltip:'download picture'}" class="downloadBar"></button>
+                    <button data-win-control="WinJS.UI.Command" data-win-res="{winControl: {label:'search',tooltip:'search.commet'}}" data-win-options="{id:'search',icon:'zoom',hidden:true}" class="searchBar"></button>
+                    <button data-win-control="WinJS.UI.Command" data-win-res="{winControl: {label:'select',tooltip:'select.commet'}}" data-win-options="{id:'select',icon:'list',}" class="selectBar"></button>
+                    <button data-win-control="WinJS.UI.Command" data-win-res="{winControl: {label:'download',tooltip:'download.commet'}}" data-win-options="{id:'download',icon:'download',}" class="downloadBar"></button>
                 </div>
         </div>
     </div>
-
-    
     <div class="mySplit" data-win-control="WinJS.UI.SplitView" data-win-options="{openedDisplayMode:'overlay'}" >
         <div class="mySplitHeader">
             <div class="mySplitNavContain">
-                <div class='active' data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Home', icon: 'home',location:'/pages/home/home.html',onclick:Utilities.navBarSwitch}"></div>
-                <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Setting', icon: 'settings',location:'/pages/settings/settings.html',onclick:Utilities.navBarSwitch}"></div>
-                <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'download', icon: 'download',location:'/pages/download/download.html',onclick:Utilities.navBarSwitch}"></div>
+                <div class='active' data-win-control="WinJS.UI.NavBarCommand" data-win-res="{winControl: {label:'home'}}"  data-win-options="{icon: 'home',location:'/pages/home/home.html',onclick:Utilities.navBarSwitch}"></div>
+                <div data-win-control="WinJS.UI.NavBarCommand" data-win-res="{winControl: {label:'setting'}}" data-win-options="{icon: 'settings',location:'/pages/settings/settings.html',onclick:Utilities.navBarSwitch}"></div>
+                <div data-win-control="WinJS.UI.NavBarCommand" data-win-res="{winControl: {label:'download'}}" data-win-options="{icon: 'download',location:'/pages/download/download.html',onclick:Utilities.navBarSwitch}"></div>
             </div>
         </div>
         <div class="mySplitContain">
@@ -54,6 +55,5 @@
             </div>
         </div>
      </div>
-    
 </body>
 </html>
