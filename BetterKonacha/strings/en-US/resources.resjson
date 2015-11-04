@@ -16,5 +16,6 @@
     "cancel":"Cancel",
     "itemselected":" items selected",
     "selectnewfolder":"Select a new folder",
-    "resetdefaultfolder":"Reset the default folder"
+    "resetdefaultfolder":"Reset the default folder",
+    "browser":"browser"
 }
