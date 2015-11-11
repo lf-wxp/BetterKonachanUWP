@@ -22,6 +22,22 @@
             fixName.textContent = resPost.value;
             progress.className = 'win-ring win-medium';
 
+            // load picture timeout tips contain
+            var loadTimeout = document.createElement('div'),
+                loadTimeoutSpan = document.createElement('span'),
+                loadTimeoutBtn = document.createElement('button');
+            loadTimeout.classList.add('loadTimeout');
+            loadTimeoutBtn.classList.add('win-button');
+            loadTimeoutSpan.textContent = WinJS.Resources.getString('loadTimeout').value;
+            loadTimeoutBtn.textContent = WinJS.Resources.getString('loadAgain').value;
+            loadTimeout.appendChild(loadTimeoutSpan);
+            loadTimeout.appendChild(loadTimeoutBtn);
+
+            loadTimeoutBtn.addEventListener('click', function (evnet) {
+                event.preventDefault();
+                fragment.removeChild(loadTimeout);
+                getFirstData();
+            }, false);
 
             var myAppBar = document.querySelector('.myAppBar'),
                 splitView = document.querySelector('.mySplit'),
@@ -142,6 +158,15 @@
                     });
                 });
             }
+            function getFirstData() {
+                fragment.appendChild(progress);
+                getListData().then(function () {
+                    fragment.removeChild(progress);
+                }, function (error) {
+                    fragment.removeChild(progress);
+                    fragment.appendChild(loadTimeout);
+                });
+            }
             function clearUpDataSource() {
                 while (Data.listItem.length) {
                     Data.listItem.splice(0, 1);
@@ -166,10 +191,7 @@
             var itemTemplate = imgListView.winControl.itemTemplate;
             imgListView.winControl.itemTemplate = incrementalTemplate(itemTemplate, Data.listItem, getListData);
             if (!Data.listItem.length) {
-                fragment.appendChild(progress);
-                getListData().then(function () {
-                    fragment.removeChild(progress);
-                });
+                getFirstData();
             }
 
             // the search function

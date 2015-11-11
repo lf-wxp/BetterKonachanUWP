@@ -17,5 +17,7 @@
     "itemselected":" 项目选中",
     "selectnewfolder":"选择新目录",
     "resetdefaultfolder":"重置为默认目录",
-    "browser":"浏览"
+    "browser":"浏览",
+    "loadTimeout":"加载超时",
+    "loadAgain":"重新加载"
 }

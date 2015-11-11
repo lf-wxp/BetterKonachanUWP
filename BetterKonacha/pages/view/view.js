@@ -17,7 +17,7 @@
                 rectField = element.querySelector('.rect'),
                 itemInfo = element.querySelector('.itemInfo'),
                 itemIndex = options.itemIndex,
-                offsetLen = 1;
+                offsetLen = 10;
             topAppBarContain.style.display = 'none';
             splitView.winControl.closedDisplayMode = "none";
 
@@ -60,7 +60,7 @@
             flipView.itemDataSource = Data.flipItem.dataSource;
             flipView.currentPage = getTheFlipWide();
             flipView.itemTemplate = flipViewTemplate;
-            flipView.addEventListener('pageselected', function (ev) {
+            flipView.addEventListener('pagecompleted', function (ev) {
                 // Adding and removing the item in datasource dynamically to keey the 
                 // datasource slim
                 var item = Data.flipItem.getAt(flipView.currentPage),
@@ -71,22 +71,20 @@
 
                 // get the bigger sample image through xhr
                 var imgTagCon = flipView.element.querySelector(".win-template[aria-selected='true']>div");
-                if (!imgTagCon.getAttribute('loaded')) {
+                if (imgTagCon&&!imgTagCon.getAttribute('loaded')) {
                     getImgFileSync(item.sample_url, imgTagCon);
                 }
                 rectField.textContent = item.width + " X " + item.height;
-                if (firstPage) {
-                    firstPage = false;
-                    return;
-                }
-                if (currentIndex - 1 < 0 && originalIndex > 0) {
-                    Data.flipItem.unshift(Data.listItem.getAt(originalIndex - 1));
-                    Data.flipItem.pop();
-                }
-                if (currentIndex + 1 >= flipLen && originalIndex < Data.listItem.length - 1) {
-                    Data.flipItem.push(Data.listItem.getAt(originalIndex + 1));
-                    Data.flipItem.shift();
-                }
+                //flip previous to see previous image and remove the last item in flipItem
+                // can't update dataSource dynamically because the currentPage must be changed when dataSource changes,
+                // the FlipView control must invoke 
+                //if (currentIndex === 0 && originalIndex > 0) {
+                //    Data.flipItem.unshift(Data.listItem.getAt(originalIndex - i));
+                //}
+                //flip next to see next image and remove the fisrt item in flipItem
+                //if (currentIndex + 1 >= flipLen && originalIndex < Data.listItem.length - 1) {
+                //    Data.flipItem.push(Data.listItem.getAt(originalIndex + i));
+                //}
             });
             var animating = WinJS.Promise.wrap();
             function showInfo() {

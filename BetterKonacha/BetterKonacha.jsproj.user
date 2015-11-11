@@ -4,7 +4,7 @@
     <ReferenceCachePath>C:\Users\frontend\AppData\Local\Temp\54dp1ng0_BetterKonacha_refcache</ReferenceCachePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DebuggerFlavor>AppHostLocalDebugger</DebuggerFlavor>
+    <DebuggerFlavor>WindowsPhoneEmulatorDebugger</DebuggerFlavor>
     <WindowsPhoneEmulatorID>8BDF218D-FDBB-4A97-90F9-3AA33B559A92;Mobile Emulator 10.0.10240.0 WVGA 4 inch 512MB</WindowsPhoneEmulatorID>
   </PropertyGroup>
 </Project>
