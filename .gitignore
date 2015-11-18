@@ -1,3 +1,12 @@
 BetterKonacha/*/Debug/*
 .vs
 BetterKonacha/bld/*
+BetterKonacha/bin/*
+BetterKonacha/AppPackages/*
+BetterKonacha/BundleArtifacts/*
+BetterKonacha/_*
+BetterKonacha/BetterKonacha_StoreKey*
+BetterKonacha/Package.StoreAssociation.xml*
+
+
+
