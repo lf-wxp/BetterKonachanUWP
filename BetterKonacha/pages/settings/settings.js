@@ -91,13 +91,15 @@
                 fileOpenPicker.fileTypeFilter.replaceAll([".png", ".jpg", ".jpeg"]);
                 fileOpenPicker.pickSingleFileAsync().done(function (file) {
                     Windows.Storage.StorageFolder.getFolderFromPathAsync(root + backgroundImg).done(function (folder) {
-                        file.copyAsync(folder).done(function copySuccesss(copyFile) {
-                            var date = new Date(),
-                                newFileName = date.getTime()+copyFile.fileType
-                            copyFile.renameAsync(newFileName).done(function () {
-                                Data.BackgroundItemList.push({ pic: '/images/backgrounds/' + newFileName });
+                        if (file) {
+                            file.copyAsync(folder).done(function copySuccesss(copyFile) {
+                                var date = new Date(),
+                                    newFileName = date.getTime() + copyFile.fileType
+                                copyFile.renameAsync(newFileName).done(function () {
+                                    Data.BackgroundItemList.push({ pic: '/images/backgrounds/' + newFileName });
+                                });
                             });
-                        });
+                        }
                     });
                     
                 });

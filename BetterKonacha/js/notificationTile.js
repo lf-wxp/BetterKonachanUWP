@@ -16,7 +16,7 @@
     }
     var index = 0;
     function updateTile() {
-        WinJS.xhr({ type: 'GET', url: 'http://konachan.com/post.json', responseType: 'json' }).then(function (result) {
+        WinJS.xhr({ type: 'GET', url: 'http://konachan.net/post.json', responseType: 'json' }).then(function (result) {
             var data = result.response;
             for (var i = 0; i < data.length; i++) {
                 if (index >= 4) {

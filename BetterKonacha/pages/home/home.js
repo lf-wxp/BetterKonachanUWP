@@ -142,7 +142,7 @@
             }
             var currentPage = 1;
             function getListData() {
-                return WinJS.xhr({ type: 'GET', url: 'http://konachan.com/post.json?page='+currentPage+"&tags="+Data.searchTag, responseType: 'json' }).then(function (result) {
+                return WinJS.xhr({ type: 'GET', url: 'http://konachan.net/post.json?page='+currentPage+"&tags="+Data.searchTag, responseType: 'json' }).then(function (result) {
                     var data = result.response;
                     currentPage += 1;
                     data.forEach(function (value, index, arry) {

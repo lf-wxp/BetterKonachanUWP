@@ -2,7 +2,7 @@
     "use strict";
 
     var test = [{
-        "preview": 'http://konachan.com/data/preview/7b/f5/7bf5a2826cab7b382064166342a0f21a.jpg',
+        "preview": 'http://konachan.net/data/preview/7b/f5/7bf5a2826cab7b382064166342a0f21a.jpg',
         "picture": '',
         "receiveData": '50',
         "finished": true,
